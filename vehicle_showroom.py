@@ -9,8 +9,8 @@ class Vehicle_Insertion:
         self._engine = ''
         self._power = 0
         self._tire = 0
-        self._turbo = ''
         self._weight = 0
+        self._turbo = 0
 
     # Adding vehicle
     def create_vehicle(self, vehicle_choice, engine_choice):
@@ -29,12 +29,21 @@ class Vehicle_Insertion:
                 else:
                     print('Wrong')
 
+                weight = 'N/A'
+                turbo = 'N/A'
+
             elif vehicle_choice == '2':
                 vehicle_type = 'Sports Car'
                 engine_type = 'Oil'
+                weight = 'N/A'
+                turbo = float(input('Enter Turbo (Bar): '))
+
             elif vehicle_choice == '3':
                 vehicle_type = 'Heavy Vehicle'
                 engine_type = 'Diesel'
+                weight = float(input('Enter Weight (Kg): '))
+                turbo = 'N/A'
+
             else:
                 print('Wrong Vehicle Selection')
 
@@ -43,6 +52,8 @@ class Vehicle_Insertion:
             self._engine = engine_type
             self._power = int(input('Enter Engine Power: '))
             self._tire = int(input('Enter Tire Size: '))
+            self._weight = weight
+            self._turbo = turbo
             return True
 
         except Exception:
@@ -50,7 +61,7 @@ class Vehicle_Insertion:
             return False
 
     def __str__(self):
-        return '\t'.join(str(a) for a in [self._type, self._model, self._engine, self._power, self._tire])
+        return '\t'.join(str(a) for a in [self._type, self._model, self._engine, self._power, self._tire, self._weight, self._turbo])
 
 
 # Vehicle Management Main
@@ -66,7 +77,8 @@ class Vehicle_Management:
             print('The Vehicle Data Has Been Successfully Inserted!')
 
     def vehicle_display_panel(self):
-        print('\t'.join(['', 'Type', '', 'Model', 'Engine', 'Power', 'Tire']))
+        print('\t'.join(['', 'Type', '', 'Model', 'Engine',
+              'Power', 'Tire', 'Weight(kg)', 'Turbo(bar)']))
         for idx, vehicle in enumerate(self.vehicles):
             print(idx + 1, end='\t')
             print(vehicle)
@@ -91,6 +103,7 @@ while True:
         print('Choice 3: Add A Heavy Vehicle')
         vehicle_choice = input('Please Choose The Vehicle You Wish To Enter: ')
 
+        # Engine Type for normal vehicle
         if vehicle_choice == '1':
             print('Choice 1: Oil Engine')
             print('Choice 2: Gas Engine')
