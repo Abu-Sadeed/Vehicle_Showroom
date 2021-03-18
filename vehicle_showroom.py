@@ -49,6 +49,7 @@ inventory = Vehicle_Management()
 while True:
     print('Choice 1: Add Vehicle to Showroom')
     print('Choice 2: View Current Showroom')
+    print('Choice 3: Delete Vehicle from Inventory')
     user_choice = input('Please enter your choice of action: ')
 
     if user_choice == '1':
