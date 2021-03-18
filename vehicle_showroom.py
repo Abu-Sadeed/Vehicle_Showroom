@@ -9,24 +9,38 @@ class Vehicle_Insertion:
         self._engine = ''
         self._power = 0
         self._tire = 0
+        self._turbo = ''
+        self._weight = 0
 
     # Adding vehicle
-    def create_vehicle(self, choice):
-
-        # Assigning the type of vehicle
-        if choice == '1':
-            vehicle_type = 'Normal Vehicle'
-        elif choice == '2':
-            vehicle_type = 'Sports Car'
-        elif choice == '3':
-            vehicle_type = 'Heavy Vehicle'
-        else:
-            print('Wrong Vehicle Selection')
+    def create_vehicle(self, vehicle_choice, engine_choice):
 
         try:
+            # Assigning the type of vehicle
+            if vehicle_choice == '1':
+                vehicle_type = 'Normal Vehicle'
+                # Engine Selection
+                if engine_choice == '1':
+                    engine_type = 'Oil'
+                elif engine_choice == '2':
+                    engine_type = 'Gas'
+                elif engine_choice == '3':
+                    engine_type = 'Diesel'
+                else:
+                    print('Wrong')
+
+            elif vehicle_choice == '2':
+                vehicle_type = 'Sports Car'
+                engine_type = 'Oil'
+            elif vehicle_choice == '3':
+                vehicle_type = 'Heavy Vehicle'
+                engine_type = 'Diesel'
+            else:
+                print('Wrong Vehicle Selection')
+
             self._type = vehicle_type
             self._model = input('Enter Vehicle Model Number: ')
-            self._engine = input('Enter Engine Type: ')
+            self._engine = engine_type
             self._power = int(input('Enter Engine Power: '))
             self._tire = int(input('Enter Tire Size: '))
             return True
@@ -44,9 +58,9 @@ class Vehicle_Management:
     def __init__(self):
         self.vehicles = []
 
-    def add_vehicle(self, choice):
+    def add_vehicle(self, vehicle_choice, engine_choice):
         vehicle = Vehicle_Insertion()
-        if vehicle.create_vehicle(choice) == True:
+        if vehicle.create_vehicle(vehicle_choice, engine_choice) == True:
             self.vehicles.append(vehicle)
             print()
             print('The Vehicle Data Has Been Successfully Inserted!')
@@ -75,9 +89,15 @@ while True:
         print('Choice 1: Add A Normal Vehicle')
         print('Choice 2: Add A Sports Vehicle')
         print('Choice 3: Add A Heavy Vehicle')
-        vehicle_choice = input('Please Choose The Vehicle You Wish To Enter')
+        vehicle_choice = input('Please Choose The Vehicle You Wish To Enter: ')
 
-        inventory.add_vehicle(vehicle_choice)
+        if vehicle_choice == '1':
+            print('Choice 1: Oil Engine')
+            print('Choice 2: Gas Engine')
+            print('Choice 3: Diesel Engine')
+            engine_choice = input('Please Enter Vehicle Engine: ')
+
+        inventory.add_vehicle(vehicle_choice, engine_choice)
 
         # Viewing inventory records
     elif user_choice == '2':
