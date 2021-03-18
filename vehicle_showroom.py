@@ -83,6 +83,13 @@ class Vehicle_Management:
             print(idx + 1, end='\t')
             print(vehicle)
 
+    def expected_visitors(self):
+        expectation_multiplier = 0
+        for idx, vehicle in enumerate(self.vehicles):
+            if vehicle._type == 'Sports Car':
+                expectation_multiplier += 1
+        return(30 + (20*expectation_multiplier))
+
 
 inventory = Vehicle_Management()
 
@@ -93,6 +100,7 @@ while True:
     print('Choice 2: View Current Showroom')
     print('Choice 3: Delete Vehicle from Inventory')
     print('Choice 4: Quit')
+    print('Expected Visitors: ', inventory.expected_visitors())
     user_choice = input('Please enter your choice of action: ')
 
     # Adding Vehicle
@@ -102,6 +110,8 @@ while True:
         print('Choice 2: Add A Sports Vehicle')
         print('Choice 3: Add A Heavy Vehicle')
         vehicle_choice = input('Please Choose The Vehicle You Wish To Enter: ')
+
+        engine_choice = 0
 
         # Engine Type for normal vehicle
         if vehicle_choice == '1':
